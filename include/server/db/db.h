@@ -1,18 +1,16 @@
 #ifndef DB_H
 #define DB_H
 
-#include<mysql/mysql.h>
-#include<string>
+#include <mysql/mysql.h>
+#include <string>
 
 using namespace std;
 
 
 
 //数据库的操作类
-class MySQL
-{
+class MySQL {
 public:
-
     //构造函数：初始化数据库的连接
     MySQL();
     

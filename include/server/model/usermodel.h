@@ -4,11 +4,10 @@
 #include "user.h"
 
 //定义用户的具体操作
-class UserModel
-{
+class UserModel {
 public:
     //增加表操作
-    bool insert(User &user);
+    bool insert(User & user);
 
     //根据用户号码查询用户信息
     User query(int id);

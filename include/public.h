@@ -3,7 +3,7 @@
 
 /*service 和 client 的公有文件*/
 
-enum EnMsgType{
+enum EnMsgType {
     //登录消息
     LOGIN_MSG = 1,
     //登录响应消息

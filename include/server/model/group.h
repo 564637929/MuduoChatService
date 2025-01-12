@@ -2,49 +2,45 @@
 #define GROUP_H
 
 #include "groupuser.h"
-#include<string>
-#include<vector>
+#include <string>
+#include <vector>
 
 using namespace std;
 
 //组表的基本操作
-class Group
-{
+class Group {
 public:
-    Group(int id = -1,string name = "",string desc = "")
-    {
+    Group(int id = -1, string name = "", string desc = "") {
         this->id = id;
         this->name = name;
         this->desc = desc;
     }
 
-    void setID(int id)
-    {
+    void setID(int id) {
         this->id = id;
     }
-    void setName(string name)
-    {
+
+    void setName(string name) {
         this->name = name;
     }
-    void setDesc(string desc)
-    {
+
+    void setDesc(string desc) {
         this->desc = desc;
     }
 
-    int getID()
-    {
+    int getID() {
         return this->id;
     }
-    string getName()
-    {
+
+    string getName() {
         return this->name;
     }
-    string getDesc()
-    {
+
+    string getDesc() {
         return this->desc;
     }
-    vector<GroupUser>&getUsers()
-    {
+
+    vector<GroupUser>&getUsers() {
         return this->users;
     }
 
@@ -52,7 +48,7 @@ private:
     int id;
     string name;
     string desc;
-    vector<GroupUser>users;
+    vector<GroupUser> users;
 };
 
 

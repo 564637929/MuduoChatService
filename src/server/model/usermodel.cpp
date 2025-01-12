@@ -1,42 +1,36 @@
 #include "usermodel.h"
 #include "db.h"
-#include<iostream>
+#include <iostream>
 using namespace std;
 
 bool UserModel::insert(User &user)
 {
     //组装sql语句
     char sql[1024] = {0};
-    sprintf(sql,"insert into user(name, password, state) values('%s', '%s', '%s')",user.getName().c_str(), user.getPwd().c_str(), user.getState().c_str());
+    sprintf(sql, "insert into user(name, password, state) values('%s', '%s', '%s')", user.getName().c_str(), user.getPwd().c_str(), user.getState().c_str());
 
     MySQL mysql;
-    if(mysql.connect())
-    {
-        if(mysql.update(sql))
-        {
+    if (mysql.connect()) {
+        if (mysql.update(sql)) {
             //获取插入成功的用户数据生成的主键id
             user.setID(mysql_insert_id(mysql.getConnection()));
             return true;
-        }       
+        }
     }
     return false;
 }
 
 //根据用户号码查询用户信息
-User UserModel::query(int id)
-{
+User UserModel::query(int id) {
     char sql[1024] = {0};
-    sprintf(sql,"select * from user where id=%d",id);
+    sprintf(sql, "select * from user where id=%d", id);
 
     MySQL mysql;
-    if(mysql.connect())
-    {
+    if (mysql.connect()) {
         MYSQL_RES* res = mysql.query(sql);
-        if(res != nullptr)
-        {
+        if (res != nullptr) {
             MYSQL_ROW row = mysql_fetch_row(res);
-            if(row != nullptr)
-            {
+            if (row != nullptr) {
                 User user;
                 user.setID(atoi(row[0]));
                 user.setName(row[1]);
@@ -53,16 +47,13 @@ User UserModel::query(int id)
 }
 
 //更新用户的状态信息
-bool UserModel::updateState(User user)
-{
+bool UserModel::updateState(User user) {
     char sql[1024] = {0};
-    sprintf(sql,"update user set state = '%s' where id = %d",user.getState().c_str(),user.getID());
+    sprintf(sql, "update user set state = '%s' where id = %d", user.getState().c_str(), user.getID());
 
     MySQL mysql;
-    if(mysql.connect())
-    {
-        if(mysql.update(sql))
-        {
+    if (mysql.connect()) {
+        if (mysql.update(sql)) {
             return true;
         }
     }
@@ -72,12 +63,11 @@ bool UserModel::updateState(User user)
 //重置用户的状态信息为offline
 void UserModel::resetState()
 {
-    char sql[1024]={0};
-    sprintf(sql,"update user set state = 'offline' where state = 'online'");
+    char sql[1024] = {0};
+    sprintf(sql, "update user set state = 'offline' where state = 'online'");
 
     MySQL mysql;
-    if(mysql.connect())
-    {
+    if (mysql.connect()) {
         mysql.update(sql);
     }
 }
